@@ -3,6 +3,8 @@ const sound = document.getElementById("soundTxt");
 const volume = document.getElementById("volumeCtrl");
 const start = document.getElementById("startTxt");
 const end = document.getElementById("endTxt");
+const dim = document.getElementById("dim");
+const dimmer = document.getElementById("dimmer");
 
 name.addEventListener("change", function() {
     if (selectedAudio != null) {
@@ -12,7 +14,8 @@ name.addEventListener("change", function() {
 
 sound.addEventListener("change", function() {
     if (selectedAudio != null) {
-        selectedAudio.audio = new Audio(sound.value);
+        alert(sound.files[0]);
+        selectedAudio.audio = new Audio(URL.createObjectURL(sound.files[0]));
     }
 });
 
@@ -34,9 +37,29 @@ end.addEventListener("change", function() {
     }
 });
 
+end.addEventListener("change", function() {
+    if (selectedAudio != null) {
+        selectedAudio.setEndTime(start.value);
+    }
+});
+
+dim.addEventListener("click", function() {
+    toggleDim();
+});
+
+dimmer.addEventListener("click", function() {
+    toggleDim();
+});
+
 document.getElementById("addmore").addEventListener("click", function() {
     audioList.add('', 'images/custom', '', true);
 });
+
+name.disabled = true;
+sound.disabled = true;
+volume.disabled = true;
+start.disabled = true;
+end.disabled = true;
 
 var audioList = new AudioList();
 audioList.add('rain', 'images/icon', 'sounds/rain.mp3', false);
@@ -63,3 +86,24 @@ function checkTime() {
         curr = curr.next;
     }
 }
+
+function toggleDim() {
+    if (dimmer.style.display == "block") {
+        dimmer.style.display = "none";
+    } else {
+        dimmer.style.display = "block";
+    }
+}
+
+/*loadDoc();
+
+function loadDoc() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(this.responseText);
+        }
+    };
+    xhttp.open("GET", "http://localhost:8080/", true);
+    xhttp.send();
+}*/

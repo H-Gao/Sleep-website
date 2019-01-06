@@ -96,6 +96,12 @@ function selectSettings(audioDevice) {
         document.getElementById("nameTxt").disabled = false;
     }
 
+    document.getElementById("startTxt").disabled = false;
+    document.getElementById("endTxt").disabled = false;
+    document.getElementById("volumeCtrl").disabled = false;
+
+
+
     if (!selectedAudio.hasStart) {
         document.getElementById("startTxt").value = "";
     } else {
